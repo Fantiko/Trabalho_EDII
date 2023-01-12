@@ -35,8 +35,8 @@ void main()
     printf("2 - Remover pessoa\n");
     printf("3 - Imprimir pessoas\n");
     printf("4 - Sair\n");
-    printf("Digite a opcao desejada: ");
     linha();
+    printf("Digite a opcao desejada: ");
     scanf("%d", &opcao);
 
     switch (opcao)

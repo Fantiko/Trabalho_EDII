@@ -95,9 +95,10 @@ void imprimirPessoa(Pessoa *p)
     printf("Sobrenome: %s\n", aux->sobrenome);
     printf("Idade: %d\n", aux->idade);
     printf("Sexo: %c\n", aux->sexo);
+    printf("Musicas que a pessoa gosta: ");
     for (int i = 0; i < 5; i++)
     {
-        printf("Musicas que a pessoa gosta: %d\n", aux->Nmusica[i]);
+        printf("%d, ", aux->Nmusica[i]);
     }   
 }
 
@@ -133,9 +134,10 @@ Pessoa* criarPessoa()
     printf("Digite o sexo da pessoa: ");
     scanf(" %d", &p->sexo);
 
-    printf("Digite 5 IDs de musicas que a pessoa gosta: ");
+    printf("Digite 5 IDs de musicas que a pessoa gosta:\n");
     for (iterador = 0; iterador < 5; iterador++)
     {
+        printf("digite o ID da musica %d: ", iterador+1);
         scanf("%d", &p->Nmusica[iterador]);
     }
     
