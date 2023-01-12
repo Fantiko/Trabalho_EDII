@@ -20,7 +20,9 @@ NoLista* createNode(Pessoa *pessoa);
 int estaVazia(NoLista**l);
 void inserirElemento(NoLista** l, Pessoa *pessoa);
 void removeElemento(NoLista** l, Pessoa *pessoa);
+void imprimirLista(NoLista **l);
 
 Pessoa* criarPessoa();
 void imprimirPessoa(Pessoa *p);
 void freePessoa(Pessoa *p);
+Pessoa* buscarPessoa(NoLista** l, char nome[50], char sobrenome[50]);

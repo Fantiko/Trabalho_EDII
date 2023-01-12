@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "auxiliar.h"
+#include <string.h>
 
 typedef struct pessoa
 {
@@ -86,6 +88,26 @@ void removeElemento(NoLista** l, Pessoa *pessoa)
         }
     }
 }
+void imprimirPessoa(Pessoa *p)
+{
+    Pessoa *aux = p;
+    printf("Nome: %s\n", aux->nome);
+    printf("Sobrenome: %s\n", aux->sobrenome);
+    printf("Idade: %d\n", aux->idade);
+    printf("Sexo: %c\n", aux->sexo);
+    for (int i = 0; i < 5; i++)
+    {
+        printf("Musicas que a pessoa gosta: %d\n", aux->Nmusica[i]);
+    }   
+}
+
+void imprimirLista(NoLista **l){
+    NoLista *aux = *l;
+    while(aux != NULL){
+        imprimirPessoa(aux->pessoa);
+        aux = aux->prox;
+    }
+}
 
 /*-----------------------------funçoes pessoa--------------------------------------------*/
 Pessoa* criarPessoa()
@@ -120,20 +142,23 @@ Pessoa* criarPessoa()
     return p;
 }
 
-void imprimirPessoa(Pessoa *p)
-{
-    Pessoa *aux = p;
-    printf("Nome: %s\n", aux->nome);
-    printf("Sobrenome: %s\n", aux->sobrenome);
-    printf("Idade: %d\n", aux->idade);
-    printf("Sexo: %c\n", aux->sexo);
-    for (int i = 0; i < 5; i++)
-    {
-        printf("Musicas que a pessoa gosta: %d\n", aux->Nmusica[i]);
-    }   
-}
+
 
 void freePessoa(Pessoa *p)
 {
     free(p);
-}   
+}
+
+Pessoa* buscarPessoa(NoLista** l, char nome[50], char sobrenome[50])
+{
+    NoLista *aux = *l;
+    while(aux != NULL)
+    {
+        if(strcmp(aux->pessoa->nome, nome) == 0 && strcmp(aux->pessoa->sobrenome, sobrenome) == 0)
+        {
+            return aux->pessoa;
+        }
+        aux = aux->prox;
+    }
+    return NULL;
+}
