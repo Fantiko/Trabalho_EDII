@@ -6,7 +6,7 @@
 typedef struct pessoa
 {
     char nome[50]; // nome da pessoa
-    char sobrenome[50]; 
+    // char sobrenome[50]; 
     int idade;
     int sexo; // 0 = masculino, 1 = feminino
     int Nmusica[5]; // numero de musicas que a pessoa gosta
@@ -88,13 +88,27 @@ void removeElemento(NoLista** l, Pessoa *pessoa)
         }
     }
 }
+
+void printasexo(int sexo)
+{
+    if(sexo == 0)
+    {
+        printf("Sexo: Masculino");
+    }
+    else
+    {
+        printf("Sexo: Feminino");
+    }
+}
+
 void imprimirPessoa(Pessoa *p)
 {
     Pessoa *aux = p;
     printf("Nome: %s\n", aux->nome);
-    printf("Sobrenome: %s\n", aux->sobrenome);
+    // printf("Sobrenome: %s\n", aux->sobrenome);
     printf("Idade: %d\n", aux->idade);
-    printf("Sexo: %c\n", aux->sexo);
+    // printf("Sexo: %c\n", aux->sexo);
+    printasexo(aux->sexo);
     printf("Musicas que a pessoa gosta: ");
     for (int i = 0; i < 5; i++)
     {
@@ -109,6 +123,8 @@ void imprimirLista(NoLista **l){
         aux = aux->prox;
     }
 }
+
+
 
 /*-----------------------------funçoes pessoa--------------------------------------------*/
 Pessoa* criarPessoa()
@@ -125,13 +141,14 @@ Pessoa* criarPessoa()
     printf("Digite o nome da pessoa: ");
     scanf("%s", p->nome);
 
-    printf("Digite o sobrenome da pessoa: ");
-    scanf("%s", p->sobrenome);
+    // printf("Digite o sobrenome da pessoa: ");
+    // scanf("%s", p->sobrenome);
 
     printf("Digite a idade da pessoa: ");
     scanf("%d", &p->idade);
 
     printf("Digite o sexo da pessoa: ");
+    printf("0 - Masculino | 1 - Feminino");
     scanf(" %d", &p->sexo);
 
     printf("Digite 5 IDs de musicas que a pessoa gosta:\n");
@@ -156,7 +173,7 @@ Pessoa* buscarPessoa(NoLista** l, char nome[50], char sobrenome[50])
     NoLista *aux = *l;
     while(aux != NULL)
     {
-        if(strcmp(aux->pessoa->nome, nome) == 0 && strcmp(aux->pessoa->sobrenome, sobrenome) == 0)
+        if(strcmp(aux->pessoa->nome, nome) == 0)
         {
             return aux->pessoa;
         }

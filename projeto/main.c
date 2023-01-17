@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "Pessoa.h"
 #include "auxiliar.h"
+#include "arquivo.h"
 #include <stdbool.h>
 #include <string.h>
 
@@ -18,8 +19,9 @@ void main()
 {
 
   NoLista *lista = criarLista();
-
-
+  /*--------------------------------------*/
+  FILE *arquivo;
+  abrirarquivo(arquivo);
 
   /*--------------------------------------*/
   bool condicao = true;
@@ -65,6 +67,7 @@ void main()
     case 4:
       printf("Sair\n");
       condicao = false;
+      fechararquivo(arquivo);
       break;
 
     default:

@@ -26,3 +26,4 @@ Pessoa* criarPessoa();
 void imprimirPessoa(Pessoa *p);
 void freePessoa(Pessoa *p);
 Pessoa* buscarPessoa(NoLista** l, char nome[50], char sobrenome[50]);
+void printasexo(int sexo);
