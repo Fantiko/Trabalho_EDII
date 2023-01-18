@@ -104,15 +104,15 @@ void printasexo(int sexo)
 void imprimirPessoa(Pessoa *p)
 {
     Pessoa *aux = p;
-    printf("Nome: %s\n", aux->nome);
+    printf("\nNome: %s\n", aux->nome);
     // printf("Sobrenome: %s\n", aux->sobrenome);
     printf("Idade: %d\n", aux->idade);
     // printf("Sexo: %c\n", aux->sexo);
     printasexo(aux->sexo);
-    printf("Musicas que a pessoa gosta: ");
+    printf("\nMusicas que a pessoa gosta: ");
     for (int i = 0; i < 5; i++)
     {
-        printf("%d, ", aux->Nmusica[i]);
+        printf("%d ", aux->Nmusica[i]);
     }   
 }
 
@@ -140,16 +140,19 @@ Pessoa* criarPessoa()
 
     printf("Digite o nome da pessoa: ");
     scanf("%s", p->nome);
+    lb();
 
     // printf("Digite o sobrenome da pessoa: ");
     // scanf("%s", p->sobrenome);
 
     printf("Digite a idade da pessoa: ");
     scanf("%d", &p->idade);
+    lb();
 
-    printf("Digite o sexo da pessoa: ");
     printf("0 - Masculino | 1 - Feminino");
+    printf("\nDigite o sexo da pessoa: ");
     scanf(" %d", &p->sexo);
+    lb();
 
     printf("Digite 5 IDs de musicas que a pessoa gosta:\n");
     for (iterador = 0; iterador < 5; iterador++)
@@ -157,6 +160,7 @@ Pessoa* criarPessoa()
         printf("digite o ID da musica %d: ", iterador+1);
         scanf("%d", &p->Nmusica[iterador]);
     }
+    lb();
     
     return p;
 }
