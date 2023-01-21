@@ -6,7 +6,6 @@
 typedef struct pessoa
 {
     char nome[50]; // nome da pessoa
-    // char sobrenome[50]; 
     int idade;
     int sexo; // 0 = masculino, 1 = feminino
     int Nmusica[5]; // numero de musicas que a pessoa gosta
@@ -105,9 +104,7 @@ void imprimirPessoa(Pessoa *p)
 {
     Pessoa *aux = p;
     printf("\nNome: %s\n", aux->nome);
-    // printf("Sobrenome: %s\n", aux->sobrenome);
     printf("Idade: %d\n", aux->idade);
-    // printf("Sexo: %c\n", aux->sexo);
     printasexo(aux->sexo);
     printf("\nMusicas que a pessoa gosta: ");
     for (int i = 0; i < 5; i++)
@@ -138,12 +135,10 @@ Pessoa* criarPessoa()
         exit(1);
     }
 
+    lb();
     printf("Digite o nome da pessoa: ");
     scanf("%s", p->nome);
     lb();
-
-    // printf("Digite o sobrenome da pessoa: ");
-    // scanf("%s", p->sobrenome);
 
     printf("Digite a idade da pessoa: ");
     scanf("%d", &p->idade);
@@ -170,18 +165,4 @@ Pessoa* criarPessoa()
 void freePessoa(Pessoa *p)
 {
     free(p);
-}
-
-Pessoa* buscarPessoa(NoLista** l, char nome[50], char sobrenome[50])
-{
-    NoLista *aux = *l;
-    while(aux != NULL)
-    {
-        if(strcmp(aux->pessoa->nome, nome) == 0)
-        {
-            return aux->pessoa;
-        }
-        aux = aux->prox;
-    }
-    return NULL;
 }

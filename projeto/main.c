@@ -23,22 +23,26 @@ void escreverPessoa(FILE *arquivo, Pessoa *p)
 }
 /*------------------------------------------------------*/
 
-void iteraLista(NoLista **l, FILE *arquivo)
+void iteraLista(NoLista **l)
 {
+  FILE *arquivo = abrirarquivo(arquivo);
+
   NoLista *aux = *l;
   while (aux != NULL)
   {
     escreverPessoa(arquivo, aux->pessoa);
     aux = aux->prox;
   }
+
+  fechararquivo(arquivo);
 }
 
-typedef struct musicas
-{
-  int IDmusica; // ID da musica
-  int Npop;     // numero de pessoas que gostam da musica
+// typedef struct musicas
+// {
+//   int IDmusica; // ID da musica
+//   int Npop;     // numero de pessoas que gostam da musica
 
-} Musicas;
+// } Musicas;
 
 /*------------------------------------------------------*/
 
@@ -46,10 +50,6 @@ void main()
 {
 
   NoLista *lista = criarLista();
-  /*--------------------------------------*/
-  FILE *arquivo;
-  arquivo = abrirarquivo(arquivo);
-
   /*--------------------------------------*/
   bool condicao = true;
   int opcao;
@@ -94,8 +94,10 @@ void main()
     case 4:
       printf("Sair\n");
       condicao = false;
-      iteraLista(&lista, arquivo);
+      iteraLista(&lista);
 
+
+      freeLista(&lista);
       break;
 
     default:
@@ -104,6 +106,15 @@ void main()
       break;
     }
   }
+  
+}
 
-  fechararquivo(arquivo);
+void freeLista(NoLista **l)
+{
+  NoLista *aux = *l;
+  while (aux != NULL)
+  {
+    free(aux->pessoa);
+    aux = aux->prox;
+  }
 }
