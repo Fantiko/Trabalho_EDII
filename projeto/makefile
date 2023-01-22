@@ -1,17 +1,6 @@
-main: main.o Pesssoa.o auxiliar.o 
-	gcc -o main main.o Pessoa.o
+all:
+	gcc *.c -o test
 
-main.o: main.c Pessoa.h auxiliar.h
-	gcc -c main.c
+run: all
+	valgrind -s --leak-check=full  ./test 
 
-Pessoa.o: Pessoa.c Pessoa.h auxiliar.h
-	gcc -c Pessoa.c
-
-auxiliar.o: auxiliar.c auxiliar.h
-	gcc -c auxiliar.c
-
-# arquivo: arquivo.c arquivo.h
-# 	gcc -c arquivo.c
-
-clean:
-	del *.o

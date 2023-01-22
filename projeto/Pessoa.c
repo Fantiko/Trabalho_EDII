@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "auxiliar.h"
+#include "pessoa.h"
 #include <string.h>
 
 int id_global = 1;
@@ -44,6 +45,7 @@ void printasexo(int sexo)
     }
 }
 
+
 void imprimirPessoa(Pessoa *p)
 {
     Pessoa *aux = p;
@@ -66,31 +68,35 @@ NoLista *createNode(Pessoa *pessoa)
     return no;
 }
 
-int estaVazia(NoLista **l)
+int estaVazia(NoLista *l)
 {
-    return (*l == NULL);
+    return (l == NULL);
 }
 
-void inserirElemento(NoLista **l, Pessoa *pessoa)
+NoLista* inserirElemento(NoLista *l, Pessoa *pessoa)
 {
+    
+    NoLista *aux = l;
     NoLista *no = createNode(pessoa);
-    if(no == NULL) return;
+    if(no == NULL) return l;
     if (estaVazia(l))
-    {
-        *l = no;
+    {   
+        l = no;
     }
     else
     {
-        NoLista *aux = *l;
+        
         while (aux->prox != NULL)
         {
             aux = aux->prox;
         }
         aux->prox = no;
+        
     }
+    return l;
 }
 
-void removeElemento(NoLista **l, Pessoa *pessoa)
+NoLista * removeElemento(NoLista *l, int ID)
 {
     if (estaVazia(l))
     {
@@ -98,9 +104,9 @@ void removeElemento(NoLista **l, Pessoa *pessoa)
     }
     else
     {
-        NoLista *aux = *l;
+        NoLista *aux = l;
         NoLista *ant = NULL;
-        while (aux != NULL && aux->pessoa != pessoa)
+        while (aux != NULL && !(verificaPessoa(aux->pessoa, ID)))
         {
             ant = aux;
             aux = aux->prox;
@@ -113,24 +119,31 @@ void removeElemento(NoLista **l, Pessoa *pessoa)
         {
             if (ant == NULL)
             {
-                *l = aux->prox;
+                l = aux->prox;
             }
             else
             {
                 ant->prox = aux->prox;
             }
+            freePessoa(aux->pessoa);
             free(aux);
         }
     }
+    return l;
+}
+
+int verificaPessoa(Pessoa *p, int ID)
+{
+    return p->id ==ID;
+
 }
 
 
 
 
-
-void imprimirLista(NoLista **l)
+void imprimirLista(NoLista *l)
 {
-    NoLista *aux = *l;
+    NoLista *aux = l;
     while (aux != NULL)
     {
         imprimirPessoa(aux->pessoa);
@@ -179,8 +192,10 @@ Pessoa *criarPessoa()
 }
 
 void freePessoa(Pessoa *p)
-{
-    free(p);
+{   
+    if(p!=NULL){
+        free(p);
+    }
 }
 
 void escreverPessoa(FILE *arquivo, Pessoa *p)
@@ -193,7 +208,7 @@ void escreverPessoa(FILE *arquivo, Pessoa *p)
 }
 /*------------------------------------------------------*/
 
-void iteraLista(NoLista **l)
+void iteraLista(NoLista *l)
 {
     FILE *arquivo = fopen("pesquisa.txt", "w");
     if (arquivo == NULL)
@@ -202,7 +217,7 @@ void iteraLista(NoLista **l)
         exit(1);
     }
 
-    NoLista *aux = *l;
+    NoLista *aux = l;
     while (aux != NULL)
     {   
         escreverPessoa(arquivo, aux->pessoa);
@@ -212,7 +227,7 @@ void iteraLista(NoLista **l)
     fclose(arquivo);
 }
 
-void leArquivo(char *nome_arquivo, NoLista **l)
+NoLista * leArquivo(char *nome_arquivo, NoLista *l)
 {
     FILE *arquivo = fopen(nome_arquivo, "r");
 
@@ -221,30 +236,59 @@ void leArquivo(char *nome_arquivo, NoLista **l)
         printf("Erro ao abrir o arquivo");
         exit(1);
     }
-
-    Pessoa *p = (Pessoa *)malloc(sizeof(Pessoa));
-    if (p == NULL)
-    {
-        printf("Erro na alocacao de memoria");
-        exit(1);
-    }
-    NoLista **aux = l;    
+    Pessoa* p = (Pessoa *)malloc(sizeof(Pessoa));
+    NoLista *aux = l;    
     lb();
+    int i=0;
     while (fscanf(arquivo, "%d %[^\t]\t%d %d\n\t%d %d %d %d %d\n", &p->id, p->nome, &p->idade, &p->sexo, &p->Nmusica[0], &p->Nmusica[1], &p->Nmusica[2], &p->Nmusica[3], &p->Nmusica[4]) != EOF)
-    {
-        inserirElemento(aux, p);
-        atualizarid();   
+    {   
+        
+        if (p == NULL)
+        {
+            printf("Erro na alocacao de memoria");
+            exit(1);
+        }
+        aux = inserirElemento(aux, p);
+        if(i==0 && l==NULL){
+            l = aux;
+            i++;
+        }
+        
+        atualizarid();
+        p = (Pessoa *)malloc(sizeof(Pessoa));  
     }
-
+    free(p);
     fclose(arquivo);
+    return l;
 }
 
-void freeLista(NoLista **l)
-{
-  NoLista *aux = *l;
+static void percorreLista(NoLista* l){
+    NoLista *aux = l;
+    NoLista * atual;
+    while (aux != NULL)
+    {
+        atual = aux;
+        aux = aux->prox;
+        printf("%s\n", atual->pessoa->nome);
+    }
+}
+void freeLista(NoLista *l)
+{   
+    if(l==NULL)printf("\n\nLINGUICA\n\n");
+    percorreLista( l);
+  NoLista *aux = l;
+  NoLista * atual;
   while (aux != NULL)
   {
-    free(aux->pessoa);
+    atual = aux;
     aux = aux->prox;
+    freePessoa(atual->pessoa);
+    free(atual);
   }
+}
+
+
+
+void imprimirNo(NoLista* n){
+    imprimirPessoa(n->pessoa);
 }

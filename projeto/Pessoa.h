@@ -1,35 +1,30 @@
+#ifndef PESSOA_H
+#define PESSOA_H
+typedef struct pessoa Pessoa;
 
-typedef struct pessoa
-{
-    int id;
-    char nome[50]; // nome da pessoa
-    int idade;
-    char sexo;
-    int Nmusica[5]; // numero de musicas que a pessoa gosta
-
-} Pessoa;
-
-typedef struct no  // lista duplamente encadeada
-{
-    Pessoa *pessoa;
-    struct no *prox;
-} NoLista;
+typedef struct no NoLista;
 
 NoLista* criarLista();
 NoLista* createNode(Pessoa *pessoa);
-int estaVazia(NoLista**l);
-void inserirElemento(NoLista** l, Pessoa *pessoa);
-void removeElemento(NoLista** l, Pessoa *pessoa);
-void imprimirLista(NoLista **l);
+int estaVazia(NoLista*l);
+
+NoLista* inserirElemento(NoLista* l, Pessoa *pessoa);
+NoLista * removeElemento(NoLista* l, int ID);
+void imprimirLista(NoLista *l);
 
 Pessoa* criarPessoa();
+int verificaPessoa(Pessoa *p, int ID);
 void imprimirPessoa(Pessoa *p);
 void freePessoa(Pessoa *p);
 void printasexo(int sexo);
-void freeLista(NoLista **l);
+void freeLista(NoLista *l);
 void escreverPessoa(FILE *arquivo, Pessoa *p);
-void iteraLista(NoLista **l);
-void leArquivo(char* nome_arquivo, NoLista **l);
+void iteraLista(NoLista *l);
+NoLista * leArquivo(char* nome_arquivo, NoLista *l);
 void atualizarid();
-void freeLista(NoLista **l);
+void freeLista(NoLista *l);
 
+
+void imprimirNo(NoLista* l);
+
+#endif

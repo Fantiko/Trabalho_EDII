@@ -6,7 +6,7 @@ void lb(){
 }
 
 void lt(){
-    system("cls");// limpa a tela
+    //system("clear");// limpa a tela
 }
 
 void linha(){

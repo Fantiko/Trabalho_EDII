@@ -23,7 +23,7 @@ void main()
 {
 
   NoLista *lista = criarLista();
-  leArquivo("pesquisa.txt", &lista);
+  lista = leArquivo("pesquisa.txt", lista);
   /*--------------------------------------*/
   bool condicao = true;
   int opcao;
@@ -49,26 +49,32 @@ void main()
       lt();
       linha();
       printf("-<<<--Cadastrar pessoa-->>>-\n");
-      inserirElemento(&lista, criarPessoa());
+      lista = inserirElemento(lista, criarPessoa());
+      imprimirLista(lista);
+      
       break;
 
     case 2:
       lt();
       linha();
       printf("-<<<--Remover pessoa-->>>-\n");
+      int id = 0;
+      printf("Digite o ID da pessoa que deseja remover: ");
+      scanf("%d", &id);
+      lista = removeElemento(lista, id); 
       break;
 
     case 3:
       lt();
       linha();
       printf("-<<<--Imprimir Lista-->>>-\n");
-      imprimirLista(&lista);
+      imprimirLista(lista);
       break;
 
     case 4:
       printf("Sair\n");
       condicao = false;
-      iteraLista(&lista);
+      iteraLista(lista);
 
 
       
@@ -76,11 +82,11 @@ void main()
 
     default:
       lb();
-      printf("Opcao invalida\n");
+      printf("Opcao invalida: %d\n", opcao);
       break;
     }
   }
-  freeLista(&lista);
+  freeLista(lista);
 }
 
 
