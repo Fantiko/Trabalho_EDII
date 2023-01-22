@@ -1,6 +1,4 @@
-Inicio do arquivo
-kaio 22 0
-	1 2 3 4 5
-caio 21 1
-	5 4 3 2 1
-Fim do arquivo
+1 kaio	22 1
+	1 1 1 1 1
+2 aa	22 1
+	2 2 2 2 2

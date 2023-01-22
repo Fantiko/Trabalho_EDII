@@ -2,40 +2,10 @@
 #include <stdlib.h>
 #include "Pessoa.h"
 #include "auxiliar.h"
-#include "arquivo.h"
 #include <stdbool.h>
 #include <string.h>
 
 // #define N 5
-
-void escreverPessoa(FILE *arquivo, Pessoa *p)
-{
-  if (arquivo == NULL)
-  {
-    printf("Erro ao abrir o arquivo");
-    exit(1);
-  }
-
-  Pessoa *aux = p;
-  fprintf(arquivo, "%s %d %d\n", aux->nome, aux->idade, aux->sexo);
-  fprintf(arquivo, "\t%d %d %d %d %d\n", aux->Nmusica[0], aux->Nmusica[1], aux->Nmusica[2], aux->Nmusica[3], aux->Nmusica[4]);
-  
-}
-/*------------------------------------------------------*/
-
-void iteraLista(NoLista **l)
-{
-  FILE *arquivo = abrirarquivo(arquivo);
-
-  NoLista *aux = *l;
-  while (aux != NULL)
-  {
-    escreverPessoa(arquivo, aux->pessoa);
-    aux = aux->prox;
-  }
-
-  fechararquivo(arquivo);
-}
 
 // typedef struct musicas
 // {
@@ -46,10 +16,14 @@ void iteraLista(NoLista **l)
 
 /*------------------------------------------------------*/
 
+
+
+
 void main()
 {
 
   NoLista *lista = criarLista();
+  leArquivo("pesquisa.txt", &lista);
   /*--------------------------------------*/
   bool condicao = true;
   int opcao;
@@ -97,7 +71,7 @@ void main()
       iteraLista(&lista);
 
 
-      freeLista(&lista);
+      
       break;
 
     default:
@@ -106,15 +80,7 @@ void main()
       break;
     }
   }
-  
+  freeLista(&lista);
 }
 
-void freeLista(NoLista **l)
-{
-  NoLista *aux = *l;
-  while (aux != NULL)
-  {
-    free(aux->pessoa);
-    aux = aux->prox;
-  }
-}
+
