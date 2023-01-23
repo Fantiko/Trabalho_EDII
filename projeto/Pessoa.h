@@ -1,8 +1,29 @@
 #ifndef PESSOA_H
 #define PESSOA_H
+
 typedef struct pessoa Pessoa;
 
 typedef struct no NoLista;
+
+
+
+struct pessoa
+{
+    int id;
+    char nome[50]; // nome da pessoa
+    int idade;
+    int sexo;       // 0 = masculino, 1 = feminino
+    int Nmusica[5]; // numero de musicas que a pessoa gosta
+
+};
+
+struct no // lista duplamente encadeada
+{
+    Pessoa *pessoa;
+    struct no *prox;
+};
+
+/*-----------------------------Funçoes lista encadeada--------------------------------------------*/
 
 NoLista* criarLista();
 NoLista* createNode(Pessoa *pessoa);

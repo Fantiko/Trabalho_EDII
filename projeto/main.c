@@ -4,15 +4,10 @@
 #include "auxiliar.h"
 #include <stdbool.h>
 #include <string.h>
+#include "Musica.h"
 
-// #define N 5
 
-// typedef struct musicas
-// {
-//   int IDmusica; // ID da musica
-//   int Npop;     // numero de pessoas que gostam da musica
 
-// } Musicas;
 
 /*------------------------------------------------------*/
 
@@ -28,6 +23,19 @@ void main()
   bool condicao = true;
   int opcao;
   /*--------------------------------------*/
+  
+  Musicas* lista_musicas;
+  lista_musicas = alocarMusicas();
+  lista_musicas = lerarquivo(lista_musicas);
+
+  /*--------------------------------------*/
+
+  popularidadeMusicas(lista, lista_musicas);
+
+
+  /*--------------------------------------*/
+
+
   while (condicao)
   {
 
@@ -49,6 +57,9 @@ void main()
       lt();
       linha();
       printf("-<<<--Cadastrar pessoa-->>>-\n");
+
+      printarMusicas(lista_musicas);
+      
       lista = inserirElemento(lista, criarPessoa());
       imprimirLista(lista);
       
@@ -76,8 +87,8 @@ void main()
       condicao = false;
       iteraLista(lista);
 
+      freeMusicas(lista_musicas);
 
-      
       break;
 
     default:

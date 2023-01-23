@@ -1,26 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "auxiliar.h"
-#include "pessoa.h"
 #include <string.h>
+#include "pessoa.h"
+#include "auxiliar.h"
 
 int id_global = 1;
 
-typedef struct pessoa
-{
-    int id;
-    char nome[50]; // nome da pessoa
-    int idade;
-    int sexo;       // 0 = masculino, 1 = feminino
-    int Nmusica[5]; // numero de musicas que a pessoa gosta
+// typedef struct pessoa
+// {
+//     int id;
+//     char nome[50]; // nome da pessoa
+//     int idade;
+//     int sexo;       // 0 = masculino, 1 = feminino
+//     int Nmusica[5]; // numero de musicas que a pessoa gosta
 
-} Pessoa;
+// } Pessoa;
 
-typedef struct no // lista duplamente encadeada
-{
-    Pessoa *pessoa;
-    struct no *prox;
-} NoLista;
+// typedef struct no // lista duplamente encadeada
+// {
+//     Pessoa *pessoa;
+//     struct no *prox;
+// } NoLista;
 /*-----------------------------Funçoes lista encadeada--------------------------------------------*/
 
 NoLista *criarLista()
@@ -274,8 +274,7 @@ static void percorreLista(NoLista* l){
 }
 void freeLista(NoLista *l)
 {   
-    if(l==NULL)printf("\n\nLINGUICA\n\n");
-    percorreLista( l);
+  //percorreLista(l);
   NoLista *aux = l;
   NoLista * atual;
   while (aux != NULL)
