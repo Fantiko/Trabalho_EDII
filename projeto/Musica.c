@@ -147,7 +147,7 @@ void shellsort(Musicas *a, int size)
 }
 
 FILE* abrirarquivos(char* nome){
-    FILE* arquivo = fopen("nome", "w");
+    FILE* arquivo = fopen(nome, "w");
     if (arquivo == NULL)
     {
         printf("Erro ao abrir o arquivo %s", nome);
@@ -159,6 +159,9 @@ FILE* abrirarquivos(char* nome){
 void fechararquivos(FILE* arquivo){
     fclose(arquivo);
 }
+
+
+
 
 void separaPessoas(NoLista* l , Musicas* m){
     FILE* Hmaior = abrirarquivos("categorias/Hmaior.txt");
@@ -172,22 +175,31 @@ void separaPessoas(NoLista* l , Musicas* m){
         if(aux->pessoa->sexo==0){
             if(aux->pessoa->idade>=20){
 
-                for (int i = 0; i < 3; i++)
-                {
-                    if (aux->pessoa->Nmusica[i]==m[i].IDmusica)
+                for(int j = 0; j < 3; j++){
+                    for (int i = 0; i < 5; i++)
                     {
-                        printf("oi");
-                        escreverPessoa(Hmaior, aux->pessoa);
+                        if (aux->pessoa->Nmusica[i]==m[j].IDmusica)
+                        {
+                            escreverPessoa(Hmaior, aux->pessoa);
+                            j=3;
+                            i=5;
+                        }
+                        
                     }
-                    
-                }
                 
+                }
+
             }else{
-                for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
                 {
-                    if (aux->pessoa->Nmusica[i]==m[i].IDmusica)
+                    for (int i = 0; i < 5; i++)
                     {
-                        escreverPessoa(Hmenor, aux->pessoa);
+                        if (aux->pessoa->Nmusica[i]==m[j].IDmusica)
+                        {
+                            escreverPessoa(Hmenor, aux->pessoa);
+                            j=3;
+                            i=5;
+                        }
                         
                     }
                     
@@ -195,21 +207,31 @@ void separaPessoas(NoLista* l , Musicas* m){
             }
         }else{
             if(aux->pessoa->idade>=20){
-                for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
                 {
-                    if (aux->pessoa->Nmusica[i]==m[i].IDmusica)
+                    for (int i = 0; i < 5; i++)
                     {
-                        escreverPessoa(Mmaior, aux->pessoa);
+                        if (aux->pessoa->Nmusica[i]==m[j].IDmusica)
+                        {
+                            escreverPessoa(Mmaior, aux->pessoa);
+                            j=3;
+                            i=5;
+                        }
                         
                     }
                     
                 }
             }else{
-                for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
                 {
-                    if (aux->pessoa->Nmusica[i]==m[i].IDmusica)
+                    for (int i = 0; i < 5; i++)
                     {
-                        escreverPessoa(Mmenor, aux->pessoa);
+                        if (aux->pessoa->Nmusica[i]==m[j].IDmusica)
+                        {
+                            escreverPessoa(Mmenor, aux->pessoa);
+                            j=3;
+                            i=5;
+                        }
                         
                     }
                     

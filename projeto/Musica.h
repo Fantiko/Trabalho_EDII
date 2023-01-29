@@ -37,6 +37,4 @@ void separaPessoas(NoLista* l , Musicas* m);
 void atualizaPop(NoLista* l, Musicas* m);
 
 
-
-
 #endif
