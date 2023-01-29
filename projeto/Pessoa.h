@@ -5,7 +5,7 @@ typedef struct pessoa Pessoa;
 
 typedef struct no NoLista;
 
-
+#include "Musica.h"
 
 struct pessoa
 {
@@ -22,6 +22,7 @@ struct no // lista duplamente encadeada
     Pessoa *pessoa;
     struct no *prox;
 };
+
 
 /*-----------------------------Funçoes lista encadeada--------------------------------------------*/
 

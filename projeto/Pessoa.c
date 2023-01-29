@@ -3,6 +3,7 @@
 #include <string.h>
 #include "pessoa.h"
 #include "auxiliar.h"
+#include "Musica.h"
 
 int id_global = 1;
 
@@ -170,23 +171,28 @@ Pessoa *criarPessoa()
     printf("Digite o nome da pessoa: ");
     scanf("%[^\n]", p->nome);
     lb();
+    lt();
 
     printf("Digite a idade da pessoa: ");
     scanf("%d", &p->idade);
     lb();
+    lt();
 
     printf("0 - Masculino | 1 - Feminino");
     printf("\nDigite o sexo da pessoa: ");
     scanf(" %d", &p->sexo);
     lb();
+    lt();
 
     printf("Digite 5 IDs de musicas que a pessoa gosta:\n");
+    printf("Obs: IDs de musicas que nao existem serao ignorados\n");
     for (iterador = 0; iterador < 5; iterador++)
     {
         printf("digite o ID da musica %d: ", iterador + 1);
         scanf("%d", &p->Nmusica[iterador]);
     }
     lb();
+    lt();
 
     return p;
 }
@@ -272,6 +278,7 @@ static void percorreLista(NoLista* l){
         printf("%s\n", atual->pessoa->nome);
     }
 }
+
 void freeLista(NoLista *l)
 {   
   //percorreLista(l);
@@ -291,3 +298,4 @@ void freeLista(NoLista *l)
 void imprimirNo(NoLista* n){
     imprimirPessoa(n->pessoa);
 }
+
