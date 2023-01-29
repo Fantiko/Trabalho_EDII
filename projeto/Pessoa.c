@@ -156,6 +156,8 @@ void imprimirLista(NoLista *l)
 Pessoa *criarPessoa()
 {
     int iterador;
+    int controle;
+
     Pessoa *p;
     p = (Pessoa *)malloc(sizeof(Pessoa));
     if (p == NULL)
@@ -183,14 +185,25 @@ Pessoa *criarPessoa()
     scanf(" %d", &p->sexo);
     lb();
     lt();
-
+    
     printf("Digite 5 IDs de musicas que a pessoa gosta:\n");
     printf("Obs: IDs de musicas que nao existem serao ignorados\n");
     for (iterador = 0; iterador < 5; iterador++)
     {
         printf("digite o ID da musica %d: ", iterador + 1);
-        scanf("%d", &p->Nmusica[iterador]);
+        scanf("%d", controle);
+        if (controle < 0 || controle > 30)
+        {
+            iterador--;
+            printf("ID invalido, digite novamente\n");
+        }else{
+            p->Nmusica[iterador] = controle;
+        } 
     }
+
+
+
+
     lb();
     lt();
 
@@ -216,7 +229,7 @@ void escreverPessoa(FILE *arquivo, Pessoa *p)
 
 void iteraLista(NoLista *l)
 {
-    FILE *arquivo = fopen("pesquisa.txt", "w");
+    FILE *arquivo = fopen("arquivos/pesquisa.txt", "w");
     if (arquivo == NULL)
     {
         printf("Erro ao abrir o arquivo");

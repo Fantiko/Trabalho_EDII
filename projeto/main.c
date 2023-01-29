@@ -12,7 +12,7 @@ void main()
 {
 
   NoLista *lista = criarLista();
-  lista = leArquivo("pesquisa.txt", lista);
+  lista = leArquivo("arquivos/pesquisa.txt", lista);
   /*--------------------------------------*/
   bool condicao = true;
   int opcao;

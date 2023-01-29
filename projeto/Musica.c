@@ -31,7 +31,7 @@ Musicas *alocarMusicas()
 Musicas *lerarquivo(Musicas *lista)
 {
     FILE *arquivo;
-    arquivo = fopen("musicas.txt", "r");
+    arquivo = fopen("arquivos/musicas.txt", "r");
     if (arquivo == NULL)
     {
         printf("Erro ao abrir o arquivo musicas.txt\n");
@@ -47,7 +47,7 @@ Musicas *lerarquivo(Musicas *lista)
         i++;
     }
     fclose(arquivo);
-    
+
     return aux;
 }
 
@@ -81,7 +81,7 @@ void popularidadeMusicas(NoLista *l, Musicas *lista)
 
             j = aux->pessoa->Nmusica[i];
 
-            lista[j-1].Npop++;
+            lista[j - 1].Npop++;
         }
         aux = aux->prox;
     }
@@ -89,7 +89,7 @@ void popularidadeMusicas(NoLista *l, Musicas *lista)
 
 void ordenarmusicas(Musicas *lista)
 {
-    FILE *arquivo = fopen("musicasOrdenadas.txt", "w");
+    FILE *arquivo = fopen("arquivos/musicasOrdenadas.txt", "w");
     shellsort(lista, N);
     int i;
     for (i = 0; i < N; i++)
@@ -105,7 +105,7 @@ void ordenarmusicas(Musicas *lista)
 
 void escreveMusica(Musicas *lista)
 {
-    FILE *arquivo = fopen("musicas.txt", "w");
+    FILE *arquivo = fopen("arquivos/musicas.txt", "w");
     int i = 0;
 
     while (i < N)
@@ -146,8 +146,9 @@ void shellsort(Musicas *a, int size)
     } while (gap > 1);
 }
 
-FILE* abrirarquivos(char* nome){
-    FILE* arquivo = fopen(nome, "w");
+FILE *abrirarquivos(char *nome)
+{
+    FILE *arquivo = fopen(nome, "w");
     if (arquivo == NULL)
     {
         printf("Erro ao abrir o arquivo %s", nome);
@@ -156,87 +157,74 @@ FILE* abrirarquivos(char* nome){
     return arquivo;
 }
 
-void fechararquivos(FILE* arquivo){
+void fechararquivos(FILE *arquivo)
+{
     fclose(arquivo);
 }
 
+void separaPessoas(NoLista *l, Musicas *m)
+{
+    FILE *Hmaior = abrirarquivos("categorias/Hmaior.txt");
+    FILE *Hmenor = abrirarquivos("categorias/Hmenor.txt");
+    FILE *Mmaior = abrirarquivos("categorias/Mmaior.txt");
+    FILE *Mmenor = abrirarquivos("categorias/Mmenor.txt");
 
+    NoLista *aux = l;
+    while (aux != NULL)
+    {
+        if (aux->pessoa->sexo == 0)
+        {
+            if (aux->pessoa->idade >= 20)
+            {
 
-
-void separaPessoas(NoLista* l , Musicas* m){
-    FILE* Hmaior = abrirarquivos("categorias/Hmaior.txt");
-    FILE* Hmenor = abrirarquivos("categorias/Hmenor.txt");
-    FILE* Mmaior = abrirarquivos("categorias/Mmaior.txt");
-    FILE* Mmenor = abrirarquivos("categorias/Mmenor.txt");
-    
-
-    NoLista* aux = l;
-    while(aux!=NULL){
-        if(aux->pessoa->sexo==0){
-            if(aux->pessoa->idade>=20){
-
-                for(int j = 0; j < 3; j++){
-                    for (int i = 0; i < 5; i++)
-                    {
-                        if (aux->pessoa->Nmusica[i]==m[j].IDmusica)
-                        {
-                            escreverPessoa(Hmaior, aux->pessoa);
-                            j=3;
-                            i=5;
-                        }
-                        
-                    }
-                
-                }
-
-            }else{
                 for (int j = 0; j < 3; j++)
                 {
-                    for (int i = 0; i < 5; i++)
+                    if (aux->pessoa->Nmusica[1] == m[j].IDmusica)
                     {
-                        if (aux->pessoa->Nmusica[i]==m[j].IDmusica)
-                        {
-                            escreverPessoa(Hmenor, aux->pessoa);
-                            j=3;
-                            i=5;
-                        }
-                        
+                        escreverPessoa(Hmaior, aux->pessoa);
+                        j = 5;
                     }
-                    
                 }
             }
-        }else{
-            if(aux->pessoa->idade>=20){
+            else
+            {
+
                 for (int j = 0; j < 3; j++)
                 {
-                    for (int i = 0; i < 5; i++)
+                    if (aux->pessoa->Nmusica[1] == m[j].IDmusica)
                     {
-                        if (aux->pessoa->Nmusica[i]==m[j].IDmusica)
-                        {
-                            escreverPessoa(Mmaior, aux->pessoa);
-                            j=3;
-                            i=5;
-                        }
-                        
+                        escreverPessoa(Hmenor, aux->pessoa);
+                        j = 5;
                     }
-                    
                 }
-            }else{
+            }
+        }
+        else
+        {
+            if (aux->pessoa->idade >= 20)
+            {
+
                 for (int j = 0; j < 3; j++)
                 {
-                    for (int i = 0; i < 5; i++)
+                    if (aux->pessoa->Nmusica[1] == m[j].IDmusica)
                     {
-                        if (aux->pessoa->Nmusica[i]==m[j].IDmusica)
-                        {
-                            escreverPessoa(Mmenor, aux->pessoa);
-                            j=3;
-                            i=5;
-                        }
-                        
+                        escreverPessoa(Mmaior, aux->pessoa);
+                        j = 5;
                     }
-                    
                 }
-                
+            }
+            else
+            {
+
+                for (int j = 0; j < 3; j++)
+                {
+                    if (aux->pessoa->Nmusica[1] == m[j].IDmusica)
+                    {
+                        escreverPessoa(Mmenor, aux->pessoa);
+                        j = 5;
+
+                    }
+                }
             }
         }
         aux = aux->prox;
@@ -248,18 +236,17 @@ void separaPessoas(NoLista* l , Musicas* m){
     fechararquivos(Mmenor);
 }
 
-void atualizaPop(NoLista* l, Musicas* m){
-    NoLista* aux = l;
-    while(aux->prox !=NULL){
-       
+void atualizaPop(NoLista *l, Musicas *m)
+{
+    NoLista *aux = l;
+    while (aux->prox != NULL)
+    {
+
         aux = aux->prox;
     }
 
     for (int i = 0; i < 5; i++)
     {
-        m[aux->pessoa->Nmusica[i]-1].Npop++;
+        m[aux->pessoa->Nmusica[i] - 1].Npop++;
     }
-    
-
-
 }
