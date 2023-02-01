@@ -156,7 +156,7 @@ void imprimirLista(NoLista *l)
 Pessoa *criarPessoa()
 {
     int iterador;
-    int controle;
+    int controle = 0;
 
     Pessoa *p;
     p = (Pessoa *)malloc(sizeof(Pessoa));
@@ -188,20 +188,21 @@ Pessoa *criarPessoa()
     
     printf("Digite 5 IDs de musicas que a pessoa gosta:\n");
     printf("Obs: IDs de musicas que nao existem serao ignorados\n");
-    for (iterador = 0; iterador < 5; iterador++)
+    iterador = 0;
+    while(iterador < 5)
     {
-        printf("digite o ID da musica %d: ", iterador + 1);
-        scanf("%d", controle);
-        if (controle < 0 || controle > 30)
+        printf("digite o ID da musica %d: ", iterador );
+        scanf("%d", &controle);
+
+        if (controle > 0 && controle <= 30)
         {
-            iterador--;
-            printf("ID invalido, digite novamente\n");
-        }else{
+            iterador++;
             p->Nmusica[iterador] = controle;
+        }else{
+            printf("ID invalido, digite novamente\n");
+            continue;
         } 
     }
-
-
 
 
     lb();

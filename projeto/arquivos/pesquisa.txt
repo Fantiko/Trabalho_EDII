@@ -4,15 +4,19 @@
 	5 4 3 2 1
 3 Pedro 	20 0
 	5 4 7 6 5
-4 helder	99 0
-	3 22 11 5 2
-5 Gustavo	19 0
+4 Gustavo	19 0
 	2 13 7 4 3
-6 joao	19 0
+5 joao	19 0
 	30 29 28 25 20
-7 flavio	20 0
+6 flavio	20 0
 	4 14 18 17 21
-8 Milena	20 1
+7 Milena	20 1
 	15 20 29 4 2
-9 mariana	18 1
+8 mariana	18 1
 	1 2 3 4 5
+9 Gabriela	18 1
+	2 3 4 5 10
+10 joaquina	15 1
+	7 1 2 3 4
+11 antonia	15 1
+	0 29 30 21 4

@@ -70,21 +70,26 @@ void freeMusicas(Musicas *lista)
 
 void popularidadeMusicas(NoLista *l, Musicas *lista)
 {
-    NoLista *aux = l;
-    int i, j;
+    int i, j = 0;
 
-    while (aux != NULL)
+    for (NoLista* atual = l; atual != NULL; atual = atual->prox)
     {
-
         for (i = 0; i < 5; i++)
         {
-
-            j = aux->pessoa->Nmusica[i];
-
-            lista[j - 1].Npop++;
+            j = 0;
+            while (j < N)
+            {
+                if (atual->pessoa->Nmusica[i] == lista[j].IDmusica)
+                {
+                    lista[j].Npop++;
+                }
+                
+                j++;
+            }
         }
-        aux = aux->prox;
     }
+    
+    
 }
 
 void ordenarmusicas(Musicas *lista)
